@@ -21,6 +21,12 @@ class ViewController: UIViewController {
     // twitter投稿画面を生成するための初期化
     var myTComposeView : SLComposeViewController!
     // twitter用のボタンを生成するための初期化
+    
+    // facebook用のボタンを生成するための初期化
+    var myFacebookButton: UIButton!
+    // facebook用のボタンを生成するための初期化
+    var myFComposeView : SLComposeViewController!
+    
     var myTwitterButton: UIButton!
     
     override func viewDidLoad() {
@@ -51,9 +57,24 @@ class ViewController: UIViewController {
         myTwitterButton.tag = 1
         myTwitterButton.addTarget(self, action: "onPostToTwitter:", forControlEvents: .TouchUpInside)
         
+        // facebook用のボタンを設定。ボタンを押された後にfacebook投稿用のメソッド呼び出しまで設定
+        myFacebookButton = UIButton()
+        myFacebookButton.frame = CGRectMake(0,0,100,100)
+        myFacebookButton.backgroundColor = UIColor.blueColor()
+        myFacebookButton.layer.masksToBounds = true
+        myFacebookButton.setTitle("F", forState: UIControlState.Normal)
+        myFacebookButton.titleLabel?.font = UIFont.systemFontOfSize(CGFloat(30))
+        myFacebookButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        myFacebookButton.layer.cornerRadius = 50.0
+        myFacebookButton.layer.position = CGPoint(x: self.view.frame.width - 320, y:self.view.frame.height - 115)
+        myFacebookButton.tag = 1
+        myFacebookButton.addTarget(self, action: "onPostToFacebook:", forControlEvents: .TouchUpInside)
+        
         // twitter用のボタンを画面に表示させるための設定
         self.view.addSubview(myTwitterButton)
-        
+
+        // facebook用のボタンを画面に表示させるための設定
+        self.view.addSubview(myFacebookButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +101,13 @@ class ViewController: UIViewController {
         myTComposeView = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
         myTComposeView.setInitialText("アプリ開発中！  #SweetSwift #&Code #スウィスウィ")
         self.presentViewController(myTComposeView, animated: true, completion: nil)
+    }
+    
+    // facebookボタンが押された時に実行される処理内容
+    func onPostToFacebook(sender : AnyObject) {
+        myFComposeView = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+        myFComposeView.setInitialText("アプリ開発中！  #SweetSwift #&Code #スウィスウィ")
+        self.presentViewController(myFComposeView, animated: true, completion: nil)
     }
     
 }
