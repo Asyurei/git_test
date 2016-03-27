@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<!-- 上タブ定義 -->
+<head>
+<meta charset="utf-8">
+<title>LBコマンド作成</title>
+</head>
+
+<!-- サーバ追加処理定義 -->
+<script type="text/javascript">
+var counter = 1;
+function add(){
+	counter++;
+	var serveradd = document.getElementById('serveradd');
+	serveradd.innerHTML += '追加サーバ' + counter + 'ホスト名<br><input type="text" name="server_name_' + counter + '"> </br>追加サーバ' + counter + 'ローカルIP<br><input type="text" name="server_localip_' + counter + '"> </br>';
+}
+</script>
+
+<!-- 本体 -->
+<body>
+<img src="../sozai/LB_command_create.png"  alt="" style="display:block;">
+<img src="../sozai/shirokuma.jpg"  alt="" style="display:block;">
+<br>
+<strong>必要事項を入力してください。</strong>
+<br>
+<form method="post" action="Confirmation.php">
+	作業者名<br>
+	<input type="text" name="user_name"> </br>
+	対象LB<br>
+	<input type="text" name="lb_name"> </br>
+	使用するGIP<br>
+	<input type="text" name="gip"> </br>
+
+	<!-- サーバ増加 -->
+	<div id="serveradd">
+	追加サーバホスト名<br>
+	<input type="text" name="server_name_1"> </br>
+	追加サーバローカルIP<br>
+	<input type="text" name="server_localip_1"> </br>
+	</div>	
+	<input type="button" onclick="add();" value="サーバー追加"> </br>
+
+	使用Port<br>
+	<input type="text" name="use_port"> </br>	
+	使用Protocol<br>
+	<input type="text" name="use_protocol"> </br>
+	Service-Group名<br>
+	<input type="text" name="servicegroup_name"> </br>
+	Virtual-Server名<br>
+	<input type="text" name="virtualserver_name"> </br>
+	アクセスリスト番号<br>
+	<input type="text" name="accesslist_no"> </br>
+	<!-- VRIDチェックボックス -->
+	VRID<br>
+	<INPUT type="checkbox" id="vrid2"  name="checkbox" value="vrid 2">
+	<LABEL for="comma">vrid 2</LABEL> </br>
+
+	<input type="submit" value="確認">
+</from>
+</body>
+</html>
